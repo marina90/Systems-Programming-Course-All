@@ -1,0 +1,67 @@
+<div class="col-lg-6 col-sm-6" style="width: 100%; top: 50px">
+  <div class="card hovercard">
+    <div class="card-background">
+      <img class="card-bkimg" alt="" [attr.src]="profile.avatar">
+    </div>
+    <div class="useravatar">
+      <img alt="" [attr.src]="profile.avatar">
+    </div>
+    <div class="card-info" style="top: 117px">
+      <span class="card-title">{{display_name}}</span>
+    </div>
+    <div *ngIf="display_name==active_user_display_name" class="btn-group" style="display: block; bottom: -20px;">
+      <button routerLink="/edit" class="btn-default pull-right">
+        <i class="glyphicon glyphicon-edit"> Edit Profile</i>
+      </button>
+    </div>
+    <div *ngIf="display_name!=active_user_display_name" class="btn-group" style="display: block; bottom: -20px;">
+      <button (click)="follow();" class="btn-default pull-right" [ngClass]="(isFollowing)?'active':''">
+        <i class="glyphicon glyphicon-edit"> Follow</i>
+      </button>
+    </div>
+  </div>
+  <div class="well" style="margin-bottom: 0px; padding: 5px; text-align: center; background: #fff">
+    <h5>{{profile.description}}</h5>
+  </div>
+  <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
+    <div class="btn-group" role="group" style="width: 33.33%">
+      <button type="button" id="posts" class="btn" href="#posts-tab" data-toggle="tab"
+              (click)="activeButtonId=1;" style="width: 100%"
+              [ngClass]="(1==activeButtonId)?'btn-primary':'btn-default'">
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+        <div class="hidden-xs">Posts</div>
+      </button>
+    </div>
+    <div class="btn-group" role="group" style="width: 33.34%">
+      <button type="button" id="following" class="btn" href="#following-tab"
+              (click)="activeButtonId=2; updateFollowing();" data-toggle="tab" style="width: 100%"
+              [ngClass]="(2==activeButtonId)?'btn-primary':'btn-default'">
+        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+        <div class="hidden-xs">Following</div>
+      </button>
+    </div>
+    <div class="btn-group" role="group" style="width: 33.33%">
+      <button type="button" id="followers" class="btn" href="#followers-tab"
+              (click)="activeButtonId=3; updateFollowers();" data-toggle="tab" style="width: 100%"
+              [ngClass]="(3==activeButtonId)?'btn-primary':'btn-default'">
+        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+        <div class="hidden-xs">Followers</div>
+      </button>
+    </div>
+  </div>
+  <div class="well">
+    <div class="tab-content">
+      <div class="tab-pane fade in active" id="posts-tab">
+        <posts></posts>
+      </div>
+      <div class="tab-pane fade in" id="following-tab">
+        <view-profiles [profile_names]="following"></view-profiles>
+      </div>
+      <div class="tab-pane fade in" id="followers-tab">
+        <view-profiles [profile_names]="followers"></view-profiles>
+      </div>
+    </div>
+  </div>
+</div>
+
+

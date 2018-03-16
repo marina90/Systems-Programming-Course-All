@@ -1,0 +1,54 @@
+<div>
+  <!-- Large modal -->
+  <div>
+  <button class="btn btn-default" data-toggle="modal" attr.data-target="#{{uuid}}">View steps</button>
+  </div>
+
+  <div class="modal fade bs-example-modal-lg" id="{{uuid}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="padding-right: 15px; padding-top: 10px">×</button>
+          {{post.title}}
+        </div>
+        <div id="{{'post-steps-carousel'+uuid}}" class="carousel slide" data-ride="carousel" data-interval="false">
+          <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+            <div *ngFor="let step of post.steps; let i = index" class="item" [ngClass]="(i == 0)?'active':''">
+              <div class="modal-header">
+                <div class="text-center">
+                  {{step.title}}
+                </div>
+              </div>
+              <div class="row" style="display: inline-block">
+                <img class="img-responsive" [attr.src]="step.cover" alt="..." style="height: 450px">
+              </div>
+              <br>
+              <div class="modal-footer" style="margin-top: 0px; padding-top: 5px; padding-bottom: 5px;">
+                <div class="row text-center">
+                  {{step.description}}
+                </div>
+                <div class="row text-center">
+                  <code *ngFor="let material of step.materials">{{material}}</code>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <a class="left carousel-control" href="{{'#post-steps-carousel'+uuid}}" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          </a>
+          <a class="right carousel-control" href="{{'#post-steps-carousel'+uuid}}" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </a>
+          <ol class="carousel-indicators" style="top: 570px; bottom: 0px">
+            <li *ngFor="let step of post.steps; let i = index" data-target="#carousel-example-generic" [ngClass]="(i == 0)?'active':''"></li>
+          </ol>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

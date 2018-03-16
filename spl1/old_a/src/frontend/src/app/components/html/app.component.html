@@ -1,0 +1,70 @@
+<div class="wrapper">
+  <nav>
+  <div class="box">
+    <div class="row row-offcanvas row-offcanvas-left">
+
+      <!-- sidebar -->
+      <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
+          <ul class="nav" id="lg-menu">
+            <li><a routerLink="/welcome" class="text-center"><i class="glyphicon glyphicon-home"></i> Welcome!</a></li>
+            <li *ngIf="displayName"><a routerLink="/posts/feed" class="text-center"><i class="glyphicon glyphicon-list"></i> Your Feed</a></li>
+            <li *ngIf="displayName"><a routerLink="/posts/news"class="text-center"><i class="glyphicon glyphicon-globe"></i> New Posts</a></li>
+            <li *ngIf="displayName"><a routerLink="/hashtags"class="text-center"><i class="glyphicon glyphicon-tags"></i> Popular Hashtags</a></li>
+          </ul>
+      </div>
+      <!-- /sidebar -->
+
+      <!-- main right col -->
+      <div class="column col-sm-10 col-xs-11" id="main">
+
+        <!-- top nav -->
+        <div class="navbar navbar-blue navbar-static-top">
+          <!-- logo -->
+          <div class="navbar-header">
+            <a routerLink="/" class="navbar-brand logo" style="padding-left: 5px; padding-right: 5px">a</a>
+          </div>
+            <!-- search -->
+            <form class="navbar-form navbar-left">
+              <div class="input-group input-group-sm" style="max-width:360px;">
+                <input type="text" [(ngModel)]="searchQuery" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+                <div class="input-group-btn">
+                  <button (click)="search();" class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                </div>
+              </div>
+            </form>
+            <!-- post -->
+            <ul class="nav navbar-nav">
+              <li>
+                <a routerLink="add-post"><i class="glyphicon glyphicon-plus"></i> Post</a>
+              </li>
+            </ul>
+            <!-- profile/logout -->
+            <ul *ngIf="displayName" class="nav navbar-nav navbar-right">
+              <li>
+                <a routerLink="{{'/profile/'+displayName}}"><i class="glyphicon glyphicon-user"></i> Profile</a>
+              </li>
+              <li>
+                <a routerLink="/" (click)="logout();"><i class="glyphicon glyphicon-log-out"></i> Logout</a>
+              </li>
+            </ul>
+            <!-- login/signup -->
+            <ul *ngIf="!displayName" class="nav navbar-nav navbar-right">
+              <li>
+                <a routerLink="/signup"><i class="glyphicon glyphicon-pencil"></i> Sign Up</a>
+              </li>
+              <li>
+                <a routerLink="/login"><i class="glyphicon glyphicon-log-in"></i> Login</a>
+              </li>
+            </ul>
+        </div>
+        <!-- /top nav -->
+
+        <!-- content -->
+        <router-outlet></router-outlet>
+      </div>
+      <!-- /main -->
+
+    </div>
+  </div>
+  </nav>
+</div>

@@ -1,0 +1,124 @@
+<div class="container" style="padding-top: 60px;">
+  <div class="row">
+    <!-- edit form column -->
+    <div class="personal-info">
+      <form class="form-horizontal" role="form">
+        <div class="form-group">
+          <a *ngIf="titleError" class="col-1-4">
+            <i class="glyphicon glyphicon-exclamation-sign"></i>
+          </a>
+          <label class="col-lg-3 control-label">Title:</label>
+          <div class="col-lg-8">
+            <input name="title" [(ngModel)]="post.title" class="form-control" type="text" placeholder="Title">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Creation time:</label>
+          <div class="col-lg-8">
+            <input name="creation_date" [(date)]="post.creation_date" class="form-control" type="datetime-local" [attr.max]="today">
+          </div>
+        </div>
+        <div class="form-group">
+          <a *ngIf="descriptionError" class="col-1-4">
+            <i class="glyphicon glyphicon-exclamation-sign"></i>
+          </a>
+          <label class="col-md-3 control-label">Description:</label>
+          <div class="col-md-8">
+            <textarea name="description" [(ngModel)]="post.description" class="form-control" maxlength="500" placeholder="Description"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <a *ngIf="authorsError" class="col-1-4">
+            <i class="glyphicon glyphicon-exclamation-sign"></i>
+          </a>
+          <label class="col-md-3 control-label">Coauthors:</label>
+          <div class="col-md-8">
+            <ul class="list-group" [hidden]="(post.authors.length==0)">
+              <li *ngFor="let coauthor of post.authors; let i = index" class="list-group-item" style="width: 90%;">{{coauthor}} <button class="badge" (click)="removeCoauthor(i);">X</button></li>
+            </ul>
+            <div class="col-lg-10" style="padding: 0px;"><input name="new_coauthor" [(ngModel)]="coauthor" placeholder="coauthor" class="form-control" style="width: 100%"></div>
+            <div class="col-lg-2" style="padding: 0px;"><button (click)="addCoauthor();" class="btn btn-primary">Add</button></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Hashtags:</label>
+          <div class="col-md-8">
+            <ul class="list-group" [hidden]="(post.hashtags.length==0)">
+              <li *ngFor="let hashtag of post.hashtags; let i = index" class="list-group-item" style="width: 90%;">{{hashtag}} <button class="badge" (click)="removeHashtag(i);">X</button></li>
+            </ul>
+            <div class="row">
+              <div class="col-lg-10" style="padding: 0px;"><input name="new_hashtag" [(ngModel)]="hashtag" placeholder="hashtag" class="form-control" style="width: 100%"></div>
+              <div class="col-lg-2" style="padding: 0px;"><button (click)="addHashtag();" class="btn btn-primary">Add</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Steps:</label>
+          <div class="col-md-8">
+            <div class="list-group" [hidden]="(post.steps.length==0)">
+              <div *ngFor="let step of post.steps; let i = index" class="list-group-item row" style="width: 90%;">
+                <div class="col-lg-1 text-center">
+                  {{i+1}}
+                  <button class="badge" (click)="removeStep(i);">X</button>
+                </div>
+                <div class="col-lg-9">
+                  <div class="row">Title: {{step.title}}</div>
+                  <div class="row">Description: {{step.description}}</div>
+                  <div class="row">
+                    Materials: <code *ngFor="let material of step.materials"
+                                     style="margin-right: 2px">{{material}}</code>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="width: 100%;">
+              <div style="padding: 0px;">
+                <input name="new_step_title" [(ngModel)]="step.title" placeholder="step title" class="form-control"
+                       style="width: 90%">
+              </div>
+              <div style="padding: 0px;">
+                <textarea name="new_step_description" [(ngModel)]="step.description" placeholder="step description"
+                          maxlength="200" class="form-control" style="width: 90%"></textarea>
+              </div>
+              <div style="padding: 0px;">
+                Materials:
+                <ul class="list-group" [hidden]="(step.materials.length==0)">
+                  <li *ngFor="let material of step.materials; let i = index" class="list-group-item"
+                      style="width: 90%;">{{material}}
+                    <button class="badge" (click)="removeMaterial(i);">X</button>
+                  </li>
+                </ul>
+              </div>
+              <div style="padding: 0px;">
+                <div class="col-lg-10" style="padding: 0px;"><input name="new_material" [(ngModel)]="material" placeholder="material" class="form-control" style="width: 100%"></div>
+                <div class="col-lg-2" style="padding: 0px;"><button (click)="addMaterial();" class="btn btn-primary">Add</button></div>
+              </div>
+              <div style="padding: 0px;">
+                <input name="new_step_media" type="file" (change)="onChangeFile($event)" class="text-center center-block well well-sm">
+              </div>
+            </div>
+
+            <div class="row text-center" style="padding: 0px;">
+              <button (click)="addStep();" class="btn btn-primary">Add</button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" class="text-center">
+          <label class="col-md-3 control-label"></label>
+          <div class="col-md-8" style="width: 100%">
+            <button type="button" (click)="submit_post();" class="btn btn-primary">Post</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="titleError" class="col-1-4">
+      {{titleError}}
+    </div>
+    <div *ngIf="descriptionError" class="col-1-4">
+      {{descriptionError}}
+    </div>
+    <div *ngIf="authorsError" class="col-1-4">
+      {{authorsError}}
+    </div>
+  </div>
+</div>

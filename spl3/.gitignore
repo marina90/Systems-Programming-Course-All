@@ -1,0 +1,22 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Client/Debug
+/Client/x64
+/Client/cmake-build-debug
+/Client/.vs/spl-ass3-Client/v14
+/Client/.idea
+/Client/spl-ass3-Client.vcxproj.user
+/Client/spl-ass3-Client.vcxproj.filters
+/Client/spl-ass3-Client.vcxproj
+/Client/spl-ass3-Client.VC.VC.opendb
+/Client/spl-ass3-Client.VC.db
+/Client/spl-ass3-Client.sln
+/Client/CMakeLists.txt
+/Server/.idea
+/Server/target/classes/bgu/spl171/net
+/Server/spl-net.iml
+/Client/bin
+/Tester/.idea
+*.pyc

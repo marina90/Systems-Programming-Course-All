@@ -1,0 +1,17 @@
+body {
+  padding-top: 20px;
+
+}
+
+.carousel-indicators li {
+  display: inline-block;
+  text-indent: 0;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  background-color: #00ffe7;
+  box-shadow: inset 1px 1px 1px 1px rgba(0,0,0,0.5);
+}
+.carousel-indicators .active {
+  background-color: #0000ff;
+}

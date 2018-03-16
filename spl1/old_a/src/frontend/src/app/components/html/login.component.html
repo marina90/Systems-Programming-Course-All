@@ -1,0 +1,25 @@
+<div id="login-modal" class="padding" xmlns="http://www.w3.org/1999/html">
+  <div class="full col-sm-9">
+    <div class="modal-dialog">
+      <div class="loginmodal-container">
+        <h1>Login to Your Account</h1><br>
+        <form>
+          <input #username type="text" name="user" placeholder="Username">
+          <input #password type="password" name="pass" placeholder="Password">
+
+          <button name="login" class="login loginmodal-submit" (click)="login(username.value, password.value);">
+            Login
+          </button>
+            Don't have a user?
+          <button name="signup" class="login loginmodal-signup" routerLink="/signup">
+            Sign up
+          </button>
+
+          <a *ngIf="errorMsg" class="col-1-4">
+            {{errorMsg}}
+          </a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

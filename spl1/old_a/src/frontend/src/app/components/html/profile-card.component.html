@@ -1,0 +1,23 @@
+<div class="col-md-4">
+  <div class="well well-sm" style="background: #fff">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="useravatar">
+          <img [attr.src]="profile.avatar" alt="" />
+        </div>
+        <br>
+        <!-- Buttons -->
+        <div class="btn-group" style="width: 132px">
+          <button routerLink="/profile/{{profile.display_name}}" type="button" class="btn btn-primary">Profile</button>
+          <button [ngClass]="{'active': isFollowing, 'focus': isFollowing}" (click)="follow();" type="button" class="btn btn-primary">Follow</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h4>{{profile.display_name}}</h4>
+        <p>
+          <i class="glyphicon glyphicon-user"></i>{{followers.length}} followers
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

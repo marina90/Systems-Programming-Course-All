@@ -1,0 +1,58 @@
+<div class="padding">
+  <div class="full col-sm-9">
+  <form class="form-horizontal" role="form">
+    <h2>Join us now!</h2>
+    <div class="form-group">
+      <label for="display_name" class="col-sm-3 control-label">Display Name</label>
+      <div class="col-sm-9">
+        <input #display_name type="text" id="display_name" placeholder="Display name" class="form-control" autofocus>
+        <a *ngIf="displayNameError" class="col-1-4">
+          <i class="glyphicon glyphicon-exclamation-sign"></i>
+        </a>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email" class="col-sm-3 control-label">Email</label>
+      <div class="col-sm-9">
+        <input #email type="email" id="email" placeholder="Email" class="form-control">
+        <a *ngIf="emailError" class="col-1-4">
+          <i class="glyphicon glyphicon-exclamation-sign"></i>
+        </a>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password" class="col-sm-3 control-label">Password</label>
+      <div class="col-sm-9">
+        <input #password type="password" id="password" placeholder="Password" class="form-control">
+        <a *ngIf="passwordError" class="col-1-4">
+          <i class="glyphicon glyphicon-exclamation-sign"></i>
+        </a>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description" class="col-sm-3 control-label">Description</label>
+      <div class="col-sm-9">
+        <textarea #description type="text" id="description" placeholder="A little about yourself"
+                  class="form-control" cols="40" rows="5"></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-9 col-sm-offset-3">
+        <button type="submit" class="btn btn-primary btn-block"
+                (click)="signup(display_name.value, email.value, password.value, description.value);">
+          Register
+        </button>
+      </div>
+    </div>
+    <a *ngIf="displayNameError" class="col-1-4">
+      {{displayNameError}}<br>
+    </a>
+    <a *ngIf="emailError" class="col-1-4">
+      {{emailError}}<br>
+    </a>
+    <a *ngIf="passwordError" class="col-1-4">
+      {{passwordError}}
+    </a>
+  </form> <!-- /form -->
+  </div>
+</div> <!-- ./container -->

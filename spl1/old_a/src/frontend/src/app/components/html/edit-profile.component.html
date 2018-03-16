@@ -1,0 +1,46 @@
+<div class="container" style="padding-top: 60px;">
+  <div class="row">
+    <!-- edit form column -->
+    <div class="personal-info">
+      <form class="form-horizontal" role="form">
+        <div class="text-center">
+          <img [attr.src]="profile.avatar" class="avatar img-circle img-thumbnail" alt="avatar">
+          <h6>Upload a different photo...</h6>
+          <input name="new_avatar" type="file" (change)="onChangeFile($event)" class="text-center center-block well well-sm">
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Display name:</label>
+          <div class="col-lg-8">
+            <input class="form-control" type="text" disabled="disabled" [(ngModel)]="profile.display_name" name="display_name">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-lg-3 control-label">Email:</label>
+          <div class="col-lg-8">
+            <input class="form-control" type="text" [(ngModel)]="profile.email" name="email">
+            <a *ngIf="emailError" class="col-1-4">
+              <i class="glyphicon glyphicon-exclamation-sign"></i>
+            </a>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-3 control-label">Description:</label>
+          <div class="col-md-8">
+            <textarea class="form-control" maxlength="150" [(ngModel)]="profile.description" name="description"></textarea>
+          </div>
+        </div>
+        <div class="form-group" class="text-center">
+          <label class="col-md-3 control-label"></label>
+          <div class="col-md-8" style="width: 100%">
+            <button (click)="save();" class="btn btn-primary" type="submit">Save Changes</button>
+            <span></span>
+            <button (click)="cancel();" class="btn btn-default" type="reset">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="emailError" class="col-1-4">
+      {{emailError}}
+    </div>
+  </div>
+</div>

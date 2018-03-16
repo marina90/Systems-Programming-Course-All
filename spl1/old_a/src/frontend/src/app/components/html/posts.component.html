@@ -1,0 +1,65 @@
+<div class="padding" style="overflow-x: hidden; overflow-y: auto" [ngClass]="profile_display_name?'':'standalone'">
+  <!-- content -->
+  <div class="row">
+    <div *ngFor="let post of posts; let i = index">
+        <div class="panel panel-default">
+          <div class="panel-heading row">
+            <div class="pull-right">
+              <i style="font-size: 14px">{{post.upload_date | date:'yMdjm'}}</i>
+            </div>
+            <div class="text-center">
+              <b style="font-size: 20px">{{post.title}}</b>
+            </div>
+          </div>
+          <div class="panel-heading row">
+            <div *ngFor="let author of post.authors" class="col-lg-1" style="text-align: center">
+              <a routerLink="{{'/profile/'+author.display_name}}">
+                <img src="{{author.avatar}}" class="img-circle" style="height: 50px; width: 50px; margin-top: 0px;">
+                <h4>{{author.display_name}}</h4>
+              </a>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div style="text-align: center">
+              <img [attr.src]="post.steps[post.steps.length-1].cover" alt="..." style="height: 350px" class="img-responsive center-block">
+              <br>
+              <post-steps-modal [post]="post"></post-steps-modal>
+            </div>
+            <hr>
+            <p>{{post.description}}</p>
+            <i style="font-size: 14px" class="pull-right">Created on: {{post.creation_date | date:'yMdjm'}}</i>
+            <br>
+            <a *ngFor="let hashtag of post.hashtags"><code>#{{hashtag.name}}</code> </a>
+            <div class="clearfix"></div>
+            <hr>
+            <form>
+              <div class="input-group">
+                <input #comment_content type="text" class="form-control" placeholder="Add a comment..">
+                <div class="input-group-btn">
+                  <button (click)="comment(post, comment_content.value); comment_content.value='';" class="btn btn-default" type="submit">Post</button>
+                  <button (click)="like(post, i);" class="btn btn-default" [ngClass]="postsLiked[i]?'active':''">+1</button>
+                </div>
+              </div>
+            </form>
+            <div class="pull-right" style="margin-right: 5px; font-size: 12px">Comments: {{post.comments.length}}. Votes: {{post.voters.length}}</div>
+            <div>
+              <button data-toggle="collapse" attr.data-target="{{'#comments'+post._id}}" class="btn-link">View comments</button>
+
+              <div id="{{'comments'+post._id}}" class="grid collapse" style="height: 0px;">
+                <div *ngFor="let comment of post.comments" class="row">
+                  <a class="pull-left text-center">
+                    <img [attr.src]="comment.user.avatar" style="height: 50px; width: 50px; margin-top: 0px;" class="img-circle"><br>
+                    {{comment.user.display_name}}
+                  </a>
+                  <div class="well" style="left: 5px; padding-left: 3px; position: relative; width: 90%; display: inline-block; padding-top: 3px; top: 10px; margin-bottom: 10px">
+                    {{comment.body}}
+                  </div>
+                  <div class="pull-right" style="font-size: smaller; margin-right: 50px">{{comment.date | date:'yMdjm'}}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div><!--/row-->
+</div><!-- /padding -->
